@@ -9,6 +9,7 @@ This tool helps you analyze job descriptions against your resume. You upload you
 - Missing skills
 - Generated email content for applications
 - Destination email extraction
+- Dark mode support with persistent preference
 
 ## Why Resume is Stored Persistently
 
@@ -137,6 +138,10 @@ npm run watch:css
    - Generated email subject and body
    - Whether to attach resume
 
+4. **Toggle dark mode:**
+   - Click the sun/moon icon in the top right corner of the extension popup
+   - Your preference is automatically saved and will persist across sessions
+
 ## Technical Details
 
 - **Backend:** FastAPI, SQLModel, SQLite
@@ -144,6 +149,7 @@ npm run watch:css
 - **Python Version:** 3.13.0
 - **Extension:** Vanilla JavaScript (no frameworks)
 - **Styling:** Tailwind CSS (compiled at build time, no CDN)
+- **Dark Mode:** Implemented using Tailwind's `class` strategy with preference persistence via `chrome.storage.local`
 - **No authentication** (single-user personal tool)
 - **No multi-user logic**
 
@@ -167,6 +173,16 @@ npm run watch:css
 ```
 
 The compiled CSS is output to `extension/styles.css` from the source file `extension/src/styles.css`.
+
+## Dark Mode
+
+The extension includes a dark mode toggle feature:
+
+- **Toggle Button:** Located in the top right corner of the extension popup (sun/moon icon)
+- **Persistence:** Your dark mode preference is automatically saved using Chrome's `chrome.storage.local` API
+- **Implementation:** Uses Tailwind CSS's `class` strategy - the `dark` class is added to the `<html>` element when dark mode is enabled
+- **Dynamic Styling:** All UI elements, including dynamically generated content (match scores, missing skills), adapt to the selected theme
+- **Automatic Application:** Your saved preference is automatically applied when you open the extension
 
 ## Notes
 
