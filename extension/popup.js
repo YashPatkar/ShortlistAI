@@ -521,19 +521,39 @@ function displayResults(data) {
     const score = data.match_score || 0;
     const scoreElement = document.getElementById('matchScore');
     scoreElement.textContent = `${score}%`;
+    const isDark = document.documentElement.classList.contains('dark');
+    
     // Update background gradient based on score
     if (score >= 70) {
-        scoreElement.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
-        scoreElement.style.borderColor = '#86efac';
-        scoreElement.style.color = '#166534';
+        if (isDark) {
+            scoreElement.style.background = 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)';
+            scoreElement.style.borderColor = '#10b981';
+            scoreElement.style.color = '#6ee7b7';
+        } else {
+            scoreElement.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+            scoreElement.style.borderColor = '#86efac';
+            scoreElement.style.color = '#166534';
+        }
     } else if (score >= 50) {
-        scoreElement.style.background = 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
-        scoreElement.style.borderColor = '#fde68a';
-        scoreElement.style.color = '#92400e';
+        if (isDark) {
+            scoreElement.style.background = 'linear-gradient(135deg, #78350f 0%, #92400e 100%)';
+            scoreElement.style.borderColor = '#fbbf24';
+            scoreElement.style.color = '#fde68a';
+        } else {
+            scoreElement.style.background = 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
+            scoreElement.style.borderColor = '#fde68a';
+            scoreElement.style.color = '#92400e';
+        }
     } else {
-        scoreElement.style.background = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
-        scoreElement.style.borderColor = '#fecaca';
-        scoreElement.style.color = '#991b1b';
+        if (isDark) {
+            scoreElement.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)';
+            scoreElement.style.borderColor = '#f87171';
+            scoreElement.style.color = '#fecaca';
+        } else {
+            scoreElement.style.background = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
+            scoreElement.style.borderColor = '#fecaca';
+            scoreElement.style.color = '#991b1b';
+        }
     }
     
     // Missing Skills
@@ -550,6 +570,12 @@ function displayResults(data) {
         li.textContent = 'None';
         li.style.background = '#d4edda';
         li.style.borderColor = '#4CAF50';
+        // Add dark mode text color
+        if (document.documentElement.classList.contains('dark')) {
+            li.style.color = '#047857'; // emerald-700 for dark mode - darker and more visible
+        } else {
+            li.style.color = '#065f46'; // emerald-800 for light mode
+        }
         missingSkillsList.appendChild(li);
     }
     
@@ -702,8 +728,97 @@ document.getElementById('clearResultsBtn').addEventListener('click', async () =>
     clearStatus('analyzeStatus');
 });
 
+// Dark mode functions
+async function loadDarkMode() {
+    const result = await chrome.storage.local.get(['darkMode']);
+    const isDark = result.darkMode || false;
+    applyDarkMode(isDark);
+    // Update dynamic colors after a short delay to ensure DOM is ready
+    setTimeout(() => updateDynamicColors(isDark), 100);
+    return isDark;
+}
+
+async function saveDarkMode(isDark) {
+    await chrome.storage.local.set({ darkMode: isDark });
+}
+
+function applyDarkMode(isDark) {
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+}
+
+// Update dynamic colors when dark mode changes
+function updateDynamicColors(isDark) {
+    // Update match score colors if it exists
+    const scoreElement = document.getElementById('matchScore');
+    if (scoreElement && scoreElement.textContent) {
+        const score = parseInt(scoreElement.textContent.replace('%', ''));
+        if (!isNaN(score)) {
+            if (score >= 70) {
+                if (isDark) {
+                    scoreElement.style.background = 'linear-gradient(135deg, #064e3b 0%, #065f46 100%)';
+                    scoreElement.style.borderColor = '#10b981';
+                    scoreElement.style.color = '#6ee7b7';
+                } else {
+                    scoreElement.style.background = 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)';
+                    scoreElement.style.borderColor = '#86efac';
+                    scoreElement.style.color = '#166534';
+                }
+            } else if (score >= 50) {
+                if (isDark) {
+                    scoreElement.style.background = 'linear-gradient(135deg, #78350f 0%, #92400e 100%)';
+                    scoreElement.style.borderColor = '#fbbf24';
+                    scoreElement.style.color = '#fde68a';
+                } else {
+                    scoreElement.style.background = 'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)';
+                    scoreElement.style.borderColor = '#fde68a';
+                    scoreElement.style.color = '#92400e';
+                }
+            } else {
+                if (isDark) {
+                    scoreElement.style.background = 'linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)';
+                    scoreElement.style.borderColor = '#f87171';
+                    scoreElement.style.color = '#fecaca';
+                } else {
+                    scoreElement.style.background = 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)';
+                    scoreElement.style.borderColor = '#fecaca';
+                    scoreElement.style.color = '#991b1b';
+                }
+            }
+        }
+    }
+    
+    // Update "None" text color in missing skills
+    const missingSkillsItems = document.querySelectorAll('#missingSkills li');
+    missingSkillsItems.forEach(li => {
+        if (li.textContent === 'None') {
+            if (isDark) {
+                li.style.color = '#047857'; // emerald-700 for dark mode - darker and more visible
+            } else {
+                li.style.color = '#065f46'; // emerald-800 for light mode
+            }
+        }
+    });
+}
+
+// Dark mode toggle handler
+document.getElementById('darkModeToggle').addEventListener('click', async () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    const newDarkMode = !isDark;
+    applyDarkMode(newDarkMode);
+    await saveDarkMode(newDarkMode);
+    // Update dynamic colors after mode change
+    updateDynamicColors(newDarkMode);
+});
+
 // Initialize on page load
 (async () => {
+    // Load dark mode preference first
+    await loadDarkMode();
+    
     await checkResumeStatus();
     
     // Load cached analysis results if they exist

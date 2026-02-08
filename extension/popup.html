@@ -6,55 +6,65 @@
     <title>ShortlistAI</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="font-sans w-[500px] min-h-[400px] p-3 bg-rose-50/30">
-    <div class="bg-white rounded-2xl p-0 shadow-md overflow-hidden">
-        <div id="extensionTitle" class="flex items-center gap-3 m-0 px-5 pt-4 pb-3">
-            <img src="icon.png" alt="ShortlistAI logo" class="h-7 w-7 flex-shrink-0" />
-            <h1 class="text-[22px] font-semibold text-gray-800 tracking-tight m-0">ShortlistAI</h1>
+<body class="font-sans w-[500px] min-h-[400px] p-3 bg-rose-50/30 dark:bg-gray-900">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-0 shadow-md overflow-hidden">
+        <div id="extensionTitle" class="flex items-center justify-between gap-3 m-0 px-5 pt-4 pb-3">
+            <div class="flex items-center">
+                <img src="icon.png" alt="ShortlistAI logo" class="h-7 w-7 flex-shrink-0" />
+                <h1 class="text-[22px] font-semibold text-gray-800 dark:text-gray-100 tracking-tight m-0">ShortlistAI</h1>
+            </div>
+            <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle dark mode">
+                <svg id="sunIcon" class="w-5 h-5 text-gray-700 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg id="moonIcon" class="w-5 h-5 text-gray-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
         </div>
         
         <!-- Input Mode Sections -->
         <div id="inputMode">
         <!-- Resume Upload Section -->
-                <div class="m-0 px-5 py-3 border-b border-rose-100" id="resumeSection">
-            <h2 class="text-base font-semibold mb-2 text-gray-700 tracking-tight">Resume</h2>
+                <div class="m-0 px-5 py-3 border-b border-rose-100 dark:border-gray-700" id="resumeSection">
+            <h2 class="text-base font-semibold mb-2 text-gray-700 dark:text-gray-200 tracking-tight">Resume</h2>
             <!-- Upload State (when no resume exists) -->
             <div id="resumeUploadState">
-                <input type="file" id="resumeFile" accept=".pdf" class="w-full mb-2 px-2.5 py-2 border-[1.5px] border-gray-300 rounded-lg text-sm bg-white transition-colors focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" />
+                <input type="file" id="resumeFile" accept=".pdf" class="w-full mb-2 px-2.5 py-2 border-[1.5px] border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" />
                 <button id="uploadResumeBtn" class="bg-primary text-white border-none px-4 py-2 rounded-lg cursor-pointer text-sm font-medium transition-all shadow-sm hover:bg-primary-hover hover:shadow active:bg-primary-active active:translate-y-[0.5px]">Upload Resume</button>
             </div>
             <!-- Uploaded State (when resume exists) -->
             <div id="resumeUploadedState" class="hidden">
                 <!-- Collapsed View (default) -->
-                <div class="flex justify-between items-center p-1.5 px-2 bg-rose-50/30 border border-rose-200 rounded-md cursor-pointer transition-colors hover:bg-rose-50 m-0" id="resumeSummaryRow">
+                <div class="flex justify-between items-center p-1.5 px-2 bg-rose-50/30 dark:bg-gray-700/50 border border-rose-200 dark:border-gray-600 rounded-md cursor-pointer transition-colors hover:bg-rose-50 dark:hover:bg-gray-700 m-0" id="resumeSummaryRow">
                     <div class="flex items-center flex-1 min-w-0">
                         <div class="flex flex-col gap-0.5 min-w-0 flex-1">
-                            <span id="resumeSummaryFilename" class="text-xs text-gray-700 font-medium overflow-hidden text-ellipsis whitespace-nowrap leading-tight"></span>
-                            <span id="resumeSummaryUpdated" class="text-[10px] text-gray-600 leading-tight"></span>
+                            <span id="resumeSummaryFilename" class="text-xs text-gray-700 dark:text-gray-200 font-medium overflow-hidden text-ellipsis whitespace-nowrap leading-tight"></span>
+                            <span id="resumeSummaryUpdated" class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight"></span>
                         </div>
                     </div>
                     <div class="flex items-center flex-shrink-0">
-                        <button id="resumeToggleBtn" class="p-1 text-[10px] bg-transparent text-gray-600 border-none cursor-pointer transition-colors flex items-center justify-center w-6 h-6 hover:text-gray-700">
+                        <button id="resumeToggleBtn" class="p-1 text-[10px] bg-transparent text-gray-600 dark:text-gray-400 border-none cursor-pointer transition-colors flex items-center justify-center w-6 h-6 hover:text-gray-700 dark:hover:text-gray-300">
                             <span class="inline-block transition-transform text-[10px]">▼</span>
                         </button>
                     </div>
                 </div>
                 <!-- Expanded View (hidden by default) -->
-                <div class="p-2.5 bg-rose-50/30 border border-rose-200 rounded-md mt-2" id="resumeDetails" style="display: none;">
+                <div class="p-2.5 bg-rose-50/30 dark:bg-gray-700/50 border border-rose-200 dark:border-gray-600 rounded-md mt-2" id="resumeDetails" style="display: none;">
                     <div class="flex justify-between items-start gap-3">
                         <div class="flex-1 m-0">
-                            <div class="p-2.5 bg-rose-50/30 border border-rose-200 rounded-md m-0">
-                                <div class="font-semibold text-emerald-600 mb-1 text-[13px]">✓ Resume uploaded</div>
-                                <div id="resumeFilename" class="text-xs text-gray-700 mb-0.5 font-medium"></div>
-                                <div id="resumeUpdatedAt" class="text-[11px] text-gray-600 m-0"></div>
+                            <div class="p-2.5 bg-rose-50/30 dark:bg-gray-700/50 border border-rose-200 dark:border-gray-600 rounded-md m-0">
+                                <div class="font-semibold text-emerald-600 dark:text-emerald-400 mb-1 text-[13px]">✓ Resume uploaded</div>
+                                <div id="resumeFilename" class="text-xs text-gray-700 dark:text-gray-200 mb-0.5 font-medium"></div>
+                                <div id="resumeUpdatedAt" class="text-[11px] text-gray-600 dark:text-gray-400 m-0"></div>
                             </div>
                         </div>
-                        <button id="resumeToggleBtnExpanded" class="p-1 text-[10px] bg-transparent text-gray-600 border-none cursor-pointer transition-colors flex items-center justify-center w-6 h-6 hover:text-gray-700">
+                        <button id="resumeToggleBtnExpanded" class="p-1 text-[10px] bg-transparent text-gray-600 dark:text-gray-400 border-none cursor-pointer transition-colors flex items-center justify-center w-6 h-6 hover:text-gray-700 dark:hover:text-gray-300">
                             <span class="inline-block transition-transform text-[10px]">▲</span>
                         </button>
                     </div>
                     <div class="mt-2.5 flex justify-end">
-                        <button id="replaceResumeBtn" class="px-3.5 py-1.5 text-xs bg-white text-gray-700 border border-rose-300 rounded-md cursor-pointer transition-all font-medium hover:bg-rose-50 hover:border-rose-400">Replace Resume</button>
+                        <button id="replaceResumeBtn" class="px-3.5 py-1.5 text-xs bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-rose-300 dark:border-gray-600 rounded-md cursor-pointer transition-all font-medium hover:bg-rose-50 dark:hover:bg-gray-600 hover:border-rose-400 dark:hover:border-gray-500">Replace Resume</button>
                     </div>
                 </div>
                 <input type="file" id="replaceResumeFile" accept=".pdf" class="hidden" />
@@ -63,22 +73,22 @@
         </div>
 
         <!-- Job Description Section -->
-        <div class="m-0 px-5 py-3 border-b border-rose-100 last:border-b-0">
-            <h2 class="text-base font-semibold mb-2 text-gray-700 tracking-tight">Job Description</h2>
-            <div class="flex gap-1.5 mb-2.5 bg-rose-50/40 p-1 rounded-lg">
-                <button class="tab-btn active flex-1 px-3 py-2 bg-transparent text-gray-600 border-none rounded-md text-[13px] font-medium cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/60 hover:text-gray-700 active:bg-white active:text-[#1a1a1a] active:shadow-sm" data-tab="text">Paste Text</button>
-                <button class="tab-btn flex-1 px-3 py-2 bg-transparent text-gray-600 border-none rounded-md text-[13px] font-medium cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/60 hover:text-gray-700" data-tab="image">Upload Image</button>
+        <div class="m-0 px-5 py-3 border-b border-rose-100 dark:border-gray-700 last:border-b-0">
+            <h2 class="text-base font-semibold mb-2 text-gray-700 dark:text-gray-200 tracking-tight">Job Description</h2>
+            <div class="flex gap-1.5 mb-2.5 bg-rose-50/40 dark:bg-gray-700/40 p-1 rounded-lg">
+                <button class="tab-btn active flex-1 px-3 py-2 bg-transparent text-gray-600 dark:text-gray-400 border-none rounded-md text-[13px] font-medium cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/60 dark:hover:bg-gray-600/60 hover:text-gray-700 dark:hover:text-gray-200 active:bg-white dark:active:bg-gray-700 active:text-[#1a1a1a] dark:active:text-gray-100 active:shadow-sm" data-tab="text">Paste Text</button>
+                <button class="tab-btn flex-1 px-3 py-2 bg-transparent text-gray-600 dark:text-gray-400 border-none rounded-md text-[13px] font-medium cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white/60 dark:hover:bg-gray-600/60 hover:text-gray-700 dark:hover:text-gray-200" data-tab="image">Upload Image</button>
             </div>
             
             <div id="textTab" class="tab-content active">
-                <textarea id="jdText" placeholder="Paste job description text here..." class="w-full min-h-[100px] p-2.5 border-[1.5px] border-gray-300 rounded-lg text-sm font-sans resize-y mb-2 bg-white text-gray-700 transition-colors leading-normal focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-gray-400"></textarea>
+                <textarea id="jdText" placeholder="Paste job description text here..." class="w-full min-h-[100px] p-2.5 border-[1.5px] border-gray-300 dark:border-gray-600 rounded-lg text-sm font-sans resize-y mb-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 transition-colors leading-normal focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 placeholder:text-gray-400 dark:placeholder:text-gray-500"></textarea>
             </div>
             
             <div id="imageTab" class="tab-content">
-                <div id="imagePasteZone" class="border-2 border-dashed border-gray-300 rounded-lg p-3 bg-rose-50/50 transition-all outline-none min-h-[100px] flex flex-col gap-2 focus:border-primary focus:bg-rose-50" tabindex="0">
+                <div id="imagePasteZone" class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-3 bg-rose-50/50 dark:bg-gray-700/50 transition-all outline-none min-h-[100px] flex flex-col gap-2 focus:border-primary focus:bg-rose-50 dark:focus:bg-gray-700" tabindex="0">
                     <div class="flex flex-col gap-2">
-                        <div class="text-[13px] text-gray-600 text-center mb-2">Paste screenshot here (Ctrl+V / Cmd+V) or choose file</div>
-                        <input type="file" id="jdImage" accept="image/*" class="w-full mb-2 px-2.5 py-2 border-[1.5px] border-gray-300 rounded-lg text-sm bg-white transition-colors focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" />
+                        <div class="text-[13px] text-gray-600 dark:text-gray-400 text-center mb-2">Paste screenshot here (Ctrl+V / Cmd+V) or choose file</div>
+                        <input type="file" id="jdImage" accept="image/*" class="w-full mb-2 px-2.5 py-2 border-[1.5px] border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" />
                     </div>
                     <div id="imagePreview" class="relative max-w-full rounded-lg overflow-hidden border border-gray-300 hidden">
                         <img id="previewImage" alt="Preview" class="w-full max-h-[200px] object-contain block" />
@@ -98,60 +108,60 @@
         </div>
 
         <!-- Results Section -->
-        <div id="results" class="bg-white p-5 rounded-none border-none hidden">
+        <div id="results" class="bg-white dark:bg-gray-800 p-5 rounded-none border-none hidden">
             <div class="flex justify-between items-center mb-5 pb-0 border-b-0">
-                <h2 class="mb-0 text-lg">Analysis Results</h2>
+                <h2 class="mb-0 text-lg text-gray-800 dark:text-gray-100">Analysis Results</h2>
                 <button id="clearResultsBtn" class="px-3.5 py-1.5 text-xs bg-rose-400 text-white border-none rounded-md cursor-pointer transition-all font-medium shadow-sm hover:bg-rose-500 hover:shadow">Clear Results</button>
             </div>
             
             <!-- SECTION 1: MATCH SCORE -->
-            <div class="mb-6 pb-5 border-b border-rose-100 last:mb-0 last:pb-0 last:border-b-0" id="matchScoreSection">
-                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100">Match Score</h3>
+            <div class="mb-6 pb-5 border-b border-rose-100 dark:border-gray-700 last:mb-0 last:pb-0 last:border-b-0" id="matchScoreSection">
+                <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100 dark:border-gray-700">Match Score</h3>
                 <div id="matchScore" class="score"></div>
             </div>
             
             <!-- SECTION 2: MATCH RESULTS -->
-            <div class="mb-6 pb-5 border-b border-rose-100 last:mb-0 last:pb-0 last:border-b-0" id="matchResultsSection">
-                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100">Match Results</h3>
+            <div class="mb-6 pb-5 border-b border-rose-100 dark:border-gray-700 last:mb-0 last:pb-0 last:border-b-0" id="matchResultsSection">
+                <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100 dark:border-gray-700">Match Results</h3>
                 
                 <!-- Missing Skills -->
                 <div class="mb-4 last:mb-0">
-                    <label class="font-semibold text-gray-700 text-[13px] tracking-tight mb-2 block">Missing Skills</label>
+                    <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight mb-2 block">Missing Skills</label>
                     <ul id="missingSkills" class="list-none p-0 m-1 mt-0"></ul>
                 </div>
                 
                 <!-- Notes/Warnings -->
                 <div id="warningsSection" class="mb-4 last:mb-0 hidden">
-                    <label class="font-semibold text-gray-700 text-[13px] tracking-tight mb-2 block">Notes</label>
+                    <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight mb-2 block">Notes</label>
                     <ul id="warningsList" class="warnings-list list-none p-0 m-0"></ul>
                 </div>
             </div>
             
             <!-- SECTION 3: CONTACT SUGGESTION -->
-            <div class="mb-6 pb-5 border-b border-rose-100 last:mb-0 last:pb-0 last:border-b-0" id="contactSection">
-                <h3 class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100">Contact Suggestion</h3>
+            <div class="mb-6 pb-5 border-b border-rose-100 dark:border-gray-700 last:mb-0 last:pb-0 last:border-b-0" id="contactSection">
+                <h3 class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-3 pb-2 border-b border-rose-100 dark:border-gray-700">Contact Suggestion</h3>
                 
                 <!-- Email Only -->
                 <div id="emailOnlyBlock" class="mt-0 hidden">
                     <div class="mb-3.5 last:mb-0">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Destination Email</label>
-                            <button class="copy-btn px-2.5 py-1 text-[11px] bg-rose-50 text-gray-700 border border-rose-200 rounded-md cursor-pointer transition-all font-medium hover:bg-rose-100 hover:border-rose-300 hover:text-gray-800" data-copy-target="destinationEmail">Copy</button>
+                            <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Destination Email</label>
+                            <button class="copy-btn px-2.5 py-1 text-[11px] bg-rose-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-rose-200 dark:border-gray-600 rounded-md cursor-pointer transition-all font-medium hover:bg-rose-100 dark:hover:bg-gray-600 hover:border-rose-300 dark:hover:border-gray-500 hover:text-gray-800 dark:hover:text-gray-100" data-copy-target="destinationEmail">Copy</button>
                         </div>
-                        <div id="destinationEmail" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>
+                        <div id="destinationEmail" class="px-3.5 py-3 bg-rose-50/30 dark:bg-gray-700/50 border border-rose-100 dark:border-gray-600 rounded-lg text-sm text-gray-700 dark:text-gray-200 break-words leading-normal whitespace-pre-wrap"></div>
                     </div>
                     
                     <div class="mb-3.5 last:mb-0">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Subject</label>
-                            <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="emailSubject">Copy</button>
+                            <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Subject</label>
+                            <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 dark:hover:bg-gray-600 hover:border-gray-400 dark:hover:border-gray-500 hover:text-[#1a1a1a] dark:hover:text-gray-100" data-copy-target="emailSubject">Copy</button>
                         </div>
                         <div id="emailSubject" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>
                     </div>
                     
                     <div class="mb-3.5 last:mb-0">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Message</label>
+                            <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Message</label>
                             <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="emailBody">Copy</button>
                         </div>
                         <div id="emailBody" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap max-h-[200px] overflow-y-auto text-[13px]"></div>
@@ -162,7 +172,7 @@
                 <div id="dmOnlyBlock" class="mt-0 hidden">
                     <div class="mb-3.5 last:mb-0">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Suggested DM Message</label>
+                            <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Suggested DM Message</label>
                             <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="dmMessage">Copy</button>
                         </div>
                         <div id="dmMessage" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>
@@ -175,7 +185,7 @@
                     <div class="mb-0">
                         <div class="mb-3.5 last:mb-0">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Destination Email</label>
+                                <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Destination Email</label>
                                 <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="destinationEmailBoth">Copy</button>
                             </div>
                             <div id="destinationEmailBoth" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>
@@ -183,7 +193,7 @@
                         
                         <div class="mb-3.5 last:mb-0">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Subject</label>
+                                <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Subject</label>
                                 <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="emailSubjectBoth">Copy</button>
                             </div>
                             <div id="emailSubjectBoth" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>
@@ -191,7 +201,7 @@
                         
                         <div class="mb-3.5 last:mb-0">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Message</label>
+                                <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Message</label>
                                 <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="emailBodyBoth">Copy</button>
                             </div>
                             <div id="emailBodyBoth" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap max-h-[200px] overflow-y-auto text-[13px]"></div>
@@ -200,14 +210,14 @@
                     
                     <!-- Divider -->
                     <div class="contact-divider flex items-center justify-center my-5 relative">
-                        <span class="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-white">OR</span>
+                        <span class="px-3 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider bg-white dark:bg-gray-800">OR</span>
                     </div>
                     
                     <!-- DM Part -->
                     <div class="mb-0">
                         <div class="mb-3.5 last:mb-0">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="font-semibold text-gray-700 text-[13px] tracking-tight m-0">Suggested DM Message</label>
+                                <label class="font-semibold text-gray-700 dark:text-gray-200 text-[13px] tracking-tight m-0">Suggested DM Message</label>
                                 <button class="copy-btn px-2.5 py-1 text-[11px] bg-gray-100 text-gray-700 border border-gray-300 rounded-md cursor-pointer transition-all font-medium hover:bg-gray-200 hover:border-gray-400 hover:text-[#1a1a1a]" data-copy-target="dmMessageBoth">Copy</button>
                             </div>
                             <div id="dmMessageBoth" class="px-3.5 py-3 bg-rose-50/30 border border-rose-100 rounded-lg text-sm text-gray-700 break-words leading-normal whitespace-pre-wrap"></div>

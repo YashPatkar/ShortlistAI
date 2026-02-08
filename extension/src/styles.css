@@ -11,6 +11,12 @@
     letter-spacing: -0.02em;
   }
 
+  .dark .score {
+    background: linear-gradient(135deg, #4b1e3d 0%, #5a2447 100%);
+    border: 1px solid #be185d;
+    @apply text-gray-100;
+  }
+
   .loading-spinner {
     @apply w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin;
   }
@@ -22,7 +28,7 @@
   }
 
   .tab-btn.active {
-    @apply bg-white text-gray-800 shadow-sm;
+    @apply bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 shadow-sm;
   }
 
   .tab-content {
@@ -34,26 +40,31 @@
   }
 
   .status.success {
-    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+    @apply bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800;
   }
 
   .status.error {
-    @apply bg-rose-100 text-rose-800 border border-rose-300;
+    @apply bg-rose-100 dark:bg-rose-900/30 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800;
   }
 
   .status.info {
-    @apply bg-blue-50 text-blue-700 border border-blue-200;
+    @apply bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800;
   }
 
   .warnings-list li {
-    @apply py-2.5 px-3 mb-1.5 bg-amber-50 border border-amber-200 border-l-[3px] border-l-amber-500 rounded-md text-[13px] text-amber-900 leading-normal last:mb-0;
+    @apply py-2.5 px-3 mb-1.5 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 border-l-[3px] border-l-amber-500 dark:border-l-amber-400 rounded-md text-[13px] text-amber-900 dark:text-amber-200 leading-normal last:mb-0;
   }
 
   #missingSkills li {
-    @apply py-2 px-3 mb-1.5 bg-rose-50/50 border border-rose-200 rounded-md text-[13px] text-gray-700 last:mb-0;
+    @apply py-2 px-3 mb-1.5 bg-rose-50/50 dark:bg-gray-700/50 border border-rose-200 dark:border-gray-600 rounded-md text-[13px] text-gray-700 dark:text-gray-300 last:mb-0;
   }
 
   .paste-zone.has-image {
-    @apply border-primary bg-rose-50;
+    @apply border-primary bg-rose-50 dark:bg-gray-700;
+  }
+
+  .contact-divider::before,
+  .contact-divider::after {
+    @apply dark:bg-gray-600;
   }
 }
