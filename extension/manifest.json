@@ -3,11 +3,17 @@
   "name": "ShortlistAI",
   "version": "1.0.0",
   "description": "Analyze job descriptions against your resume",
+  "icons": {
+    "128": "icon.png"
+  },
   "permissions": [
     "storage"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icon.png"
+    }
   },
   "host_permissions": [
     "http://localhost:8000/*"
