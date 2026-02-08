@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "ShortlistAI",
+  "version": "1.0.0",
+  "description": "Analyze job descriptions against your resume",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "http://localhost:8000/*"
+  ]
+}

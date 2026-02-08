@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom component styles that need specific styling */
+@layer components {
+  .score {
+    @apply text-4xl font-bold text-center py-6 rounded-lg mt-0;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+    border: 1px solid #f9a8d4;
+    letter-spacing: -0.02em;
+  }
+
+  .loading-spinner {
+    @apply w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin;
+  }
+
+  .contact-divider::before,
+  .contact-divider::after {
+    content: '';
+    @apply flex-1 h-px bg-gray-200;
+  }
+
+  .tab-btn.active {
+    @apply bg-white text-gray-800 shadow-sm;
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .status.success {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+
+  .status.error {
+    @apply bg-rose-100 text-rose-800 border border-rose-300;
+  }
+
+  .status.info {
+    @apply bg-blue-50 text-blue-700 border border-blue-200;
+  }
+
+  .warnings-list li {
+    @apply py-2.5 px-3 mb-1.5 bg-amber-50 border border-amber-200 border-l-[3px] border-l-amber-500 rounded-md text-[13px] text-amber-900 leading-normal last:mb-0;
+  }
+
+  #missingSkills li {
+    @apply py-2 px-3 mb-1.5 bg-rose-50/50 border border-rose-200 rounded-md text-[13px] text-gray-700 last:mb-0;
+  }
+
+  .paste-zone.has-image {
+    @apply border-primary bg-rose-50;
+  }
+}

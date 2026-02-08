@@ -1,0 +1,14 @@
+{
+  "name": "resume-analyzer-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension for analyzing resumes against job descriptions",
+  "scripts": {
+    "build:css": "tailwindcss -i ./extension/src/styles.css -o ./extension/styles.css --minify",
+    "watch:css": "tailwindcss -i ./extension/src/styles.css -o ./extension/styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17"
+  }
+}
